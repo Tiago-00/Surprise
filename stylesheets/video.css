@@ -1,0 +1,74 @@
+/* Configuração básica para a página */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+}
+
+/* Contêiner do vídeo */
+.video-container {
+    position: relative;
+    width: 100vw; /* Largura da viewport */
+    height: 100vh; /* Altura da viewport */
+    overflow: hidden;
+}
+
+/* Vídeo responsivo */
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%; /* O vídeo sempre cobre a largura mínima */
+    min-height: 100%; /* O vídeo sempre cobre a altura mínima */
+    width: auto; /* Permite o ajuste automático */
+    height: auto; /* Permite o ajuste automático */
+    object-fit: cover; /* Faz o vídeo preencher a tela sem deformar */
+}
+
+video.active {
+    display: block; /* Mostra o vídeo quando ativo */
+}
+
+.transition {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 1s ease-in-out;
+}
+
+.transition.active {
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 3;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+    video {
+        object-fit: contain; /* Ajusta para telas menores */
+    }
+}

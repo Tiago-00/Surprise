@@ -1,0 +1,1138 @@
+#game {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle, #000428, #0d1b2a);
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    z-index: 4;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Garante que os elementos fiquem distribuídos corretamente */
+    min-height: 100vh; /* Garante que o conteúdo ocupe toda a altura da tela */
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.item {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.item:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#finalMessage {
+    font-size: 24px;
+    color: gold;
+}
+
+
+
+nav {
+width: 100%;
+display: flex;
+margin-bottom: 3%;
+padding: 2%;
+background-color: #fafafa !important;
+}
+
+nav a img {
+top: 30%;
+width: 18em;
+}
+
+html.win-active, body.win-active {
+overflow: hidden;
+}
+
+.win-link {
+text-align: center;
+padding: 15px;
+background-color: red;
+text-decoration: none;
+color: #fafafa;
+font-size: 25px;
+border-radius: 4px;
+}
+
+.adsense{
+text-align: center;
+padding-bottom : 15px;
+margin-bottom: 20px;
+margin-top: -5%;
+padding-top: 15px;
+}
+
+
+
+div.body-container {
+text-align: center;
+display: flex;
+flex-flow: column nowrap;
+justify-content: center;
+align-items: center;
+}
+
+h2 {
+font-size: 1.5em;
+}
+
+h3 {
+font-size: 1em;
+}
+
+h4 {
+font-size: .9em;
+}
+
+a, p {
+font-size: .8em;
+}
+
+#chest-wrap {
+max-width: 400px;
+width: 90%;
+margin-bottom: 40px;
+}
+
+#button-wrap {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.chest-button {
+background: green;
+color: #fafafa;
+padding: 15px 40px;
+font-weight: 700;
+border-radius: 4px;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+  user-select: none;
+cursor: pointer;
+margin: 5px;
+}
+
+#chests-container {
+    display: flex; /* Configura o contêiner como flexível */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 20px; /* Adiciona espaço entre os baús */
+    flex-wrap: wrap; /* Permite que os baús "quebrem" para a próxima linha se necessário */
+    margin: 20px auto; /* Centraliza o contêiner no eixo horizontal */
+    padding: 20px; /* Adiciona um espaçamento interno */
+}
+
+.chest-wrap {
+    width: auto; /* Permite que os baús tenham largura dinâmica */
+    height: auto; /* Permite altura dinâmica */
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.chest-wrap:hover #chest {
+    transform: scale(1.1); /* Amplia o SVG ao passar o mouse */
+}
+
+#chest {
+    width: 220px; /* Define largura dos SVGs */
+    height: 220px; /* Ajusta a altura proporcionalmente */
+    transition: transform 0.3s ease; /* Animação de hover */
+}
+
+
+#chest #sparkles,
+#chest #lock,
+#chest #top,
+#chest #bottom,
+#chest #wires_bottom {
+-webkit-transform-origin: 250px 200px;
+  transform-origin: 250px 200px;
+}
+#chest #lock {
+-webkit-transform-origin: 200px 200px;
+  transform-origin: 200px 200px;
+}
+#chest #left_handle {
+-webkit-transform-origin: 10% 50%;
+  transform-origin: 10% 50%;
+}
+#chest #right_handle {
+-webkit-transform-origin: 80% 50%;
+  transform-origin: 80% 50%;
+}
+#chest #sparkles #sparkle_mid {
+opacity: 0;
+-webkit-animation: fadeIn 2s infinite alternate;
+  animation: fadeIn 2s infinite alternate;
+}
+#chest #sparkles #sparkle_left {
+opacity: 0;
+-webkit-animation: fadeIn 2s infinite alternate 0.75s;
+  animation: fadeIn 2s infinite alternate 0.75s;
+}
+#chest #sparkles #sparkle_right {
+opacity: 0;
+-webkit-animation: fadeIn 2s infinite alternate 1.5s;
+  animation: fadeIn 2s infinite alternate 1.5s;
+}
+#chest #lock_line {
+opacity: 0;
+}
+#chest.shake-chest #lock {
+-webkit-animation: shakeChestTop 1.2s infinite ease;
+  animation: shakeChestTop 1.2s infinite ease;
+}
+#chest.shake-chest #bottom, #chest.shake-chest #wires_bottom {
+-webkit-animation: shakeChestBottom 1.2s infinite ease;
+  animation: shakeChestBottom 1.2s infinite ease;
+}
+#chest.shake-chest #top {
+-webkit-animation: shakeChestTop 1.2s infinite ease;
+  animation: shakeChestTop 1.2s infinite ease;
+}
+#chest.shake-chest #top .cls-20, #chest.shake-chest #top .cls-21 {
+-webkit-animation: shakeChestTopWires 1.2s infinite ease;
+  animation: shakeChestTopWires 1.2s infinite ease;
+}
+#chest.shake-chest #left_handle, #chest.shake-chest #right_handle {
+-webkit-animation: shakeChestHandle 1.2s infinite ease;
+  animation: shakeChestHandle 1.2s infinite ease;
+}
+#chest.shake-chest #sparkles {
+-webkit-animation: shakeChestTop 1.2s infinite ease;
+  animation: shakeChestTop 1.2s infinite ease;
+}
+#chest.shake-chest #wires_bottom .cls-21, #chest.shake-chest #wires_bottom .cls-23 {
+-webkit-animation: shakeChestBottomWires 1.2s infinite ease;
+  animation: shakeChestBottomWires 1.2s infinite ease;
+}
+#chest.shake-chest #wires_bottom .cls-20 {
+-webkit-animation: shakeChestBottomWire 1.2s infinite ease;
+  animation: shakeChestBottomWire 1.2s infinite ease;
+}
+#chest.open-chest #lock {
+-webkit-animation: openLock 1s ease forwards 2s;
+  animation: openLock 1s ease forwards 2s;
+}
+#chest.open-chest #lock .cls-29, #chest.open-chest #lock .cls-31, #chest.open-chest #lock .lock-background {
+transition: fill .5s ease 2s;
+}
+#chest.open-chest #lock .cls-29 {
+fill: green;
+}
+#chest.open-chest #lock .cls-31 {
+fill: darkgreen;
+}
+#chest.open-chest #lock .lock-background {
+fill: limegreen;
+}
+#chest.open-chest #top {
+-webkit-animation: openChestTop 3s ease forwards 2s;
+  animation: openChestTop 3s ease forwards 2s;
+}
+#chest.open-chest #sparkles, #chest.open-chest #wires_bottom {
+opacity: 0;
+transition: .5s ease 3s;
+}
+#chest.open-chest #lock_line {
+opacity: 1;
+-webkit-animation: lockLineAnimation 2s linear forwards;
+  animation: lockLineAnimation 2s linear forwards;
+}
+
+svg#chest .cls-1 {
+fill: #3a2415;
+}
+svg#chest .cls-2 {
+fill: #424A47;
+}
+svg#chest .cls-3 {
+fill: #f8ec23;
+}
+svg#chest .cls-4 {
+fill: #875d26;
+}
+svg#chest .cls-5 {
+fill: #3b2314;
+}
+svg#chest .cls-6 {
+fill: #ffe309;
+}
+svg#chest .cls-7 {
+fill: #f6bb49;
+}
+svg#chest .cls-8 {
+fill: #ffd00a;
+}
+svg#chest .cls-9 {
+fill: #424A47;
+}
+svg#chest .cls-10, svg#chest .cls-12 {
+fill: #424A47;
+}
+svg#chest .cls-11, svg#chest .cls-18, svg#chest .cls-26, svg#chest .cls-28 {
+fill: #ffd00a;
+}
+svg#chest .cls-11 {
+opacity: 0.34;
+}
+svg#chest .cls-12 {
+opacity: 0.25;
+}
+svg#chest .cls-13, svg#chest .cls-22 {
+fill: #422918;
+}
+svg#chest .cls-14 {
+fill: #1d70b7;
+}
+svg#chest .cls-15 {
+fill: #4bbced;
+}
+svg#chest .cls-16, svg#chest .cls-25, svg#chest .cls-30, svg#chest .cls-32, svg#chest .cls-33, svg#chest .cls-34 {
+fill: none;
+stroke-miterlimit: 10;
+}
+svg#chest .cls-16 {
+stroke: #6BC04B;
+}
+svg#chest .cls-16, svg#chest .cls-32, svg#chest .cls-33, svg#chest .cls-34 {
+stroke-linecap: round;
+}
+svg#chest .cls-16 {
+stroke-width: 3.46px;
+}
+svg#chest .cls-17 {
+fill: #a2d7e5;
+}
+svg#chest .cls-19 {
+fill: #6BC04B;
+}
+svg#chest .cls-20 {
+fill: #6BC04B;
+}
+svg#chest .cls-21 {
+fill: blue;
+}
+svg#chest .cls-22 {
+opacity: 0.35;
+}
+svg#chest .cls-23 {
+fill: #ffec00;
+}
+svg#chest .cls-24 {
+fill: #f8bf3e;
+}
+svg#chest .cls-25 {
+stroke: #2b2b2b;
+stroke-width: 1.83px;
+}
+svg#chest .cls-26 {
+opacity: 0.86;
+}
+svg#chest .cls-27 {
+fill: #fcea0d;
+}
+svg#chest .cls-28 {
+opacity: 0.65;
+}
+svg#chest .cls-29 {
+fill: #214459;
+}
+svg#chest .cls-30 {
+stroke: #422918;
+}
+svg#chest .cls-30, svg#chest .cls-34 {
+stroke-width: 5.19px;
+}
+svg#chest .cls-31 {
+fill: #dbdbdb;
+}
+svg#chest .cls-32 {
+stroke: #80cad5;
+stroke-width: 3.69px;
+}
+svg#chest .cls-33 {
+stroke: #d1eaf6;
+stroke-width: 0.87px;
+}
+svg#chest .cls-34 {
+stroke: #2b2b2b;
+}
+
+@-webkit-keyframes fadeIn {
+from {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+to {
+opacity: 1;
+}
+}
+@-webkit-keyframes shakeChestBottom {
+0% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+15% {
+-webkit-transform: translateY(-5px) rotate(-2deg);
+    transform: translateY(-5px) rotate(-2deg);
+}
+25% {
+-webkit-transform: translateY(-10px) rotate(0deg);
+    transform: translateY(-10px) rotate(0deg);
+}
+60% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+}
+@keyframes shakeChestBottom {
+0% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+15% {
+-webkit-transform: translateY(-5px) rotate(-2deg);
+    transform: translateY(-5px) rotate(-2deg);
+}
+25% {
+-webkit-transform: translateY(-10px) rotate(0deg);
+    transform: translateY(-10px) rotate(0deg);
+}
+60% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+}
+@-webkit-keyframes shakeChestBottomWires {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+25% {
+-webkit-transform: rotate(-1.5deg) translateX(-5px);
+    transform: rotate(-1.5deg) translateX(-5px);
+}
+35% {
+-webkit-transform: rotate(-2deg) translateX(-5px);
+    transform: rotate(-2deg) translateX(-5px);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@keyframes shakeChestBottomWires {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+25% {
+-webkit-transform: rotate(-1.5deg) translateX(-5px);
+    transform: rotate(-1.5deg) translateX(-5px);
+}
+35% {
+-webkit-transform: rotate(-2deg) translateX(-5px);
+    transform: rotate(-2deg) translateX(-5px);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@-webkit-keyframes shakeChestBottomWire {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+25% {
+-webkit-transform: rotate(-1.5deg) translateX(-6px);
+    transform: rotate(-1.5deg) translateX(-6px);
+}
+35% {
+-webkit-transform: rotate(-2deg) translateX(-10px);
+    transform: rotate(-2deg) translateX(-10px);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@keyframes shakeChestBottomWire {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+25% {
+-webkit-transform: rotate(-1.5deg) translateX(-6px);
+    transform: rotate(-1.5deg) translateX(-6px);
+}
+35% {
+-webkit-transform: rotate(-2deg) translateX(-10px);
+    transform: rotate(-2deg) translateX(-10px);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@-webkit-keyframes shakeChestTop {
+0% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+15% {
+-webkit-transform: translateY(-10px) rotate(2deg);
+    transform: translateY(-10px) rotate(2deg);
+}
+25% {
+-webkit-transform: translateY(-20px) rotate(-2deg);
+    transform: translateY(-20px) rotate(-2deg);
+}
+35% {
+-webkit-transform: translateY(-20px) rotate(2deg);
+    transform: translateY(-20px) rotate(2deg);
+}
+60% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+}
+@keyframes shakeChestTop {
+0% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+15% {
+-webkit-transform: translateY(-10px) rotate(2deg);
+    transform: translateY(-10px) rotate(2deg);
+}
+25% {
+-webkit-transform: translateY(-20px) rotate(-2deg);
+    transform: translateY(-20px) rotate(-2deg);
+}
+35% {
+-webkit-transform: translateY(-20px) rotate(2deg);
+    transform: translateY(-20px) rotate(2deg);
+}
+60% {
+-webkit-transform: translateY(0) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
+}
+}
+@-webkit-keyframes shakeChestTopWires {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(1deg) translateY(-5px);
+    transform: rotate(1deg) translateY(-5px);
+}
+25% {
+-webkit-transform: rotate(-1deg) translateY(5px);
+    transform: rotate(-1deg) translateY(5px);
+}
+35% {
+-webkit-transform: rotate(1deg) translateY(-5px);
+    transform: rotate(1deg) translateY(-5px);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@keyframes shakeChestTopWires {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(1deg) translateY(-5px);
+    transform: rotate(1deg) translateY(-5px);
+}
+25% {
+-webkit-transform: rotate(-1deg) translateY(5px);
+    transform: rotate(-1deg) translateY(5px);
+}
+35% {
+-webkit-transform: rotate(1deg) translateY(-5px);
+    transform: rotate(1deg) translateY(-5px);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@-webkit-keyframes shakeChestHandle {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+25% {
+-webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+35% {
+-webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@keyframes shakeChestHandle {
+0% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+15% {
+-webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+25% {
+-webkit-transform: rotate(5deg);
+    transform: rotate(5deg);
+}
+35% {
+-webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+60% {
+-webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+}
+@-webkit-keyframes openLock {
+0% {
+-webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+opacity: 1;
+}
+30% {
+-webkit-transform: rotate(-8deg) scale(1);
+    transform: rotate(-8deg) scale(1);
+opacity: 1;
+}
+45% {
+-webkit-transform: rotate(-8deg) scale(1);
+    transform: rotate(-8deg) scale(1);
+opacity: 1;
+}
+100% {
+-webkit-transform: rotate(-8deg) scale(2);
+    transform: rotate(-8deg) scale(2);
+opacity: 0;
+}
+}
+@keyframes openLock {
+0% {
+-webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+opacity: 1;
+}
+30% {
+-webkit-transform: rotate(-8deg) scale(1);
+    transform: rotate(-8deg) scale(1);
+opacity: 1;
+}
+45% {
+-webkit-transform: rotate(-8deg) scale(1);
+    transform: rotate(-8deg) scale(1);
+opacity: 1;
+}
+100% {
+-webkit-transform: rotate(-8deg) scale(2);
+    transform: rotate(-8deg) scale(2);
+opacity: 0;
+}
+}
+@-webkit-keyframes openChestTop {
+0% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+opacity: 1;
+}
+35% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+opacity: 1;
+}
+45% {
+-webkit-transform: translateY(-8%);
+    transform: translateY(-8%);
+opacity: 1;
+}
+75% {
+-webkit-transform: translateY(-20%);
+    transform: translateY(-20%);
+opacity: 0;
+}
+100% {
+-webkit-transform: translateY(-20%);
+    transform: translateY(-20%);
+opacity: 0;
+}
+}
+@keyframes openChestTop {
+0% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+opacity: 1;
+}
+35% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+opacity: 1;
+}
+45% {
+-webkit-transform: translateY(-8%);
+    transform: translateY(-8%);
+opacity: 1;
+}
+75% {
+-webkit-transform: translateY(-20%);
+    transform: translateY(-20%);
+opacity: 0;
+}
+100% {
+-webkit-transform: translateY(-20%);
+    transform: translateY(-20%);
+opacity: 0;
+}
+}
+@-webkit-keyframes lockLineAnimation {
+0% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+30% {
+-webkit-transform: translateY(16.5%);
+    transform: translateY(16.5%);
+}
+60% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+90% {
+-webkit-transform: translateY(16.5%);
+    transform: translateY(16.5%);
+opacity: 1;
+}
+100% {
+-webkit-transform: translateY(16.5%);
+    transform: translateY(16.5%);
+opacity: 0;
+}
+}
+@keyframes lockLineAnimation {
+0% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+30% {
+-webkit-transform: translateY(16.5%);
+    transform: translateY(16.5%);
+}
+60% {
+-webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+90% {
+-webkit-transform: translateY(16.5%);
+    transform: translateY(16.5%);
+opacity: 1;
+}
+100% {
+-webkit-transform: translateY(16.5%);
+    transform: translateY(16.5%);
+opacity: 0;
+}
+}
+
+#win-container {
+position: fixed !important;
+display: table;
+height: 100%;
+width: 100%;
+top: 0;
+left: 0;
+transform: scale(0);
+z-index: 1;
+}
+
+#win-container .win-background {
+display: table-cell;
+background: rgba(0, 0, 0, 0.8);
+text-align: center;
+vertical-align: middle;
+}
+#win-container .win-background .win {
+background: white;
+padding: 50px;
+display: inline-block;
+border-radius: 3px;
+font-weight: 300;
+position: relative;
+}
+
+#win-container > .win-background > .win > .win-text {
+display: flex;
+flex-flow: column wrap;
+justify-content: center;
+align-items: center;
+position: relative;
+z-index: 2;
+}
+
+#win-container .win-background .win h2 {
+font-size: 25px;
+line-height: 25px;
+margin-bottom: 15px;
+}
+#win-container .win-background .win p {
+font-size: 18px;
+line-height: 22px;
+}
+#win-container .win-background .win .win-svg {
+position: absolute !important;
+top: 0;
+left: 0;
+height: 100%;
+width: 100%;
+border-radius: 3px;
+}
+#win-container .win-background .win .win-svg rect {
+stroke: #fff;
+stroke-width: 2px;
+stroke-dasharray: 778;
+stroke-dashoffset: 778;
+}
+
+#win-container.five {
+transform: scale(1);
+}
+#win-container.five .win-background {
+background: transparent;
+animation: fadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#win-container.five .win-background .win {
+transform: translateX(-1500px);
+animation: roadRunnerIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#win-container.five.out {
+animation: quickScaleDown 0s .5s linear forwards;
+}
+#win-container.five.out .win-background {
+animation: fadeOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+#win-container.five.out .win-background .win {
+animation: roadRunnerOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#close {
+cursor: pointer;
+}
+
+@keyframes roadRunnerIn {
+0% {
+transform: translateX(-1500px) skewX(30deg) scaleX(1.3);
+}
+70% {
+transform: translateX(30px) skewX(0deg) scaleX(0.9);
+}
+100% {
+transform: translateX(0px) skewX(0deg) scaleX(1);
+}
+}
+@keyframes roadRunnerOut {
+0% {
+transform: translateX(0px) skewX(0deg) scaleX(1);
+}
+30% {
+transform: translateX(-30px) skewX(0deg) scaleX(0.9);
+}
+100% {
+transform: translateX(1500px) skewX(30deg) scaleX(0);
+}
+}
+
+.top-3-cities {
+text-align: left;
+}
+
+/* ------------------------------ MEDIA QUERIES ----------------------------  */
+
+/*
+##Device = Tablets, Ipads (portrait)
+##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+h2 {
+font-size: 28px;
+}
+
+h3 {
+font-size: 20px;
+}
+
+h4 {
+font-size: 16px;
+}
+
+a, p {
+font-size: 13px;
+}
+}
+
+/*
+##Device = Tablets, Ipads (landscape)
+##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+h2 {
+font-size: 14px;
+}
+
+h3 {
+font-size: 14px;
+}
+
+h4 {
+font-size: 14px;
+}
+
+a, p {
+font-size: 12px;
+}
+}
+
+/*
+##Device = Low Resolution Tablets, Mobiles (Landscape)
+##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+h2 {
+font-size: 14px;
+}
+
+h3 {
+font-size: 14px;
+}
+
+h4 {
+font-size: 14px;
+}
+
+a, p {
+font-size: 12px;
+}
+}
+
+/*
+##Device = Most of the Smartphones Mobiles (Portrait)
+##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+h2 {
+font-size: 14px;
+}
+
+h3 {
+font-size: 14px;
+}
+
+h4 {
+font-size: 14px;
+}
+
+a, p {
+font-size: 12px;
+}
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#modal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+#overlay-book {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#book-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+#close-book {
+    position: absolute;
+    top: 9%;
+    left: 68%;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    padding: 15px 23px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 10px;
+    z-index: 1001;
+    transition: 0.3s;
+}
+
+
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+    
+#combination-lock {
+    position: relative; /* Em vez de fixo, deixa-o seguir o fluxo da página */
+    bottom:4%; /* Remove qualquer fixação ao fundo da tela */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    background: #333;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    margin-top: 1%; /* Empurra o cadeado para o final da página */
+}
+
+
+
+
+.lock-digit {
+    width: 50px;
+    height: 70px;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 70px;
+    background: black;
+    color: #0f0;
+    border-radius: 5px;
+    border: 2px solid #555;
+    font-weight: bold;
+}
+
+
+
+
+
+#overlay-book1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#book-container1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: none;
+}

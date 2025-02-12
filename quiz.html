@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz </title>
+    <link rel="stylesheet" href="stylesheets/quiz.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz </h1>
+        <div id="question-container"></div>
+        <div id="answer-buttons" class="btn-container"></div>
+        <input type="text" id="user-response" class="text-box hidden" placeholder="Outra opção...">
+        <p id="score-text" class="hidden"></p>
+        <button id="next-btn" class="next-btn">Próxima</button>
+        <button id="close-btn" class="hidden" onclick="window.parent.closeOverlayQuiz()">Fechar</button>
+
+    </div>
+    
+    <script>
+        const questionContainer = document.getElementById('question-container');
+        const answerButtons = document.getElementById('answer-buttons');
+        const nextButton = document.getElementById('next-btn');
+        const closeButton = document.getElementById('close-btn');
+        const scoreText = document.getElementById('score-text');
+        const userResponse = document.getElementById('user-response');
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+        let questions = [
+            {
+                question: "Qual foi o dia que deu origem a tudo 📅?",
+                answers: [
+                    { text: "26-08-2024", correct: false },
+                    { text: "29-08-2024", correct: true },
+                    { text: "02-09-2024", correct: false },
+                    { text: "12-09-2024", correct: false }
+                ]
+            },
+            {
+                question: "Onde é que foi o nosso primeiro encontro 📍?",
+                answers: [
+                    { text: "No Oceanário", correct: false },
+                    { text: "No Restaurante", correct: false },
+                    { text: "No Zardim Zoológico", correct: true },
+                    { text: "No Cinema", correct: false }
+                ]
+            },
+
+            {
+                question: "Qual é a foto que melhor nos representa?",
+                answers: [
+                    { image: "images/Quiz/suricata.png", correct: false },
+                    { image: "images/Quiz/monkey.png", correct: false },
+                    { image: "images/Quiz/dogs.png", correct: false },
+                    { image: "images/Quiz/Lontras.png", correct: true }
+
+                ]
+            },
+
+            {
+                question: "Qual é a nossa data ❤️?",
+                answers: [
+                    { text: "15-09-2024", correct: false },
+                    { text: "25-10-2024", correct: false },
+                    { text: "12-11-2024", correct: false },
+                    { text: "25-11-2024", correct: true }
+                ]
+            },
+            {
+                question: "Qual vai ser a nossa próxima viagem ✈️?",
+                answers: [
+                    { image: "images/Quiz/Japao.png", correct: true },
+                    { image: "images/Quiz/egito.png", correct: true },
+                    { image: "images/Quiz/grecia.png", correct: true },
+                    { image: "images/Quiz/disney.png", correct: true }
+                ],
+                textBox: true
+            },
+            {
+                question: "Quem é o mais inteligente 🧠?",
+                answers: [
+                    { text: "Eu!", correct: true },
+                    { text: "Definitivamente eu!", correct: true },
+                    { text: "Sem dúvidas eu!", correct: true },
+                    { text: "Todas as opções!", correct: true }
+                ]
+            }
+        ];
+
+        function startGame() {
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+            nextButton.innerText = 'Próxima';
+            nextButton.style.display = 'none';
+            closeButton.classList.add('hidden');
+            scoreText.classList.add('hidden');
+            questionContainer.style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            let currentQuestion = questions[currentQuestionIndex];
+            questionContainer.innerHTML = '';
+
+            if (currentQuestion.question) {
+                const questionText = document.createElement('p');
+                questionText.innerText = currentQuestion.question;
+                questionContainer.appendChild(questionText);
+            }
+            
+            const container = document.createElement('div');
+            container.classList.add(currentQuestion.answers[0].image ? 'image-container' : 'btn-container');
+            
+            currentQuestion.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.classList.add('btn');
+                button.dataset.correct = answer.correct;
+                button.addEventListener('click', () => selectAnswer(button, answer));
+                
+                if (answer.text) {
+                    button.innerText = answer.text;
+                } else if (answer.image) {
+                    const img = document.createElement('img');
+                    img.src = answer.image;
+                    img.alt = "Opção de resposta";
+                    img.classList.add('answer-image');
+                    button.appendChild(img);
+                }
+                
+                container.appendChild(button);
+            });
+            answerButtons.appendChild(container);
+
+            if (currentQuestion.textBox) {
+                userResponse.classList.remove('hidden');
+                userResponse.addEventListener('input', handleTextBoxInput);
+            } else {
+                userResponse.classList.add('hidden');
+            }
+        }
+
+        function handleTextBoxInput() {
+            const buttons = document.querySelectorAll('.btn');
+            if (userResponse.value.trim().length > 0) {
+                nextButton.style.display = 'block';
+                buttons.forEach(button => button.classList.add('disabled'));
+            } else {
+                nextButton.style.display = 'none';
+                buttons.forEach(button => button.classList.remove('disabled'));
+            }
+        }
+
+        function resetState() {
+            nextButton.style.display = 'none';
+            while (answerButtons.firstChild) {
+                answerButtons.removeChild(answerButtons.firstChild);
+            }
+            userResponse.value = '';
+        }
+
+        function selectAnswer(button) {
+            if (!userResponse.classList.contains('hidden') && userResponse.value.trim() !== '') {
+                return;
+            }
+            
+            if (selectedAnswer) {
+                selectedAnswer.classList.remove('selected');
+            }
+            selectedAnswer = button;
+            button.classList.add('selected');
+            nextButton.style.display = 'block';
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (nextButton.innerText === 'Reiniciar') {
+                startGame();
+                return;
+            }
+            
+            if (selectedAnswer && selectedAnswer.dataset.correct === "true") {
+                score++;
+            }
+            
+            currentQuestionIndex++;
+            selectedAnswer = null;
+            if (currentQuestionIndex < questions.length) {
+                showQuestion();
+            } else {
+                questionContainer.style.display = 'none';
+                scoreText.innerText = `Você acertou ${score} de ${questions.length} perguntas!`;
+                scoreText.classList.remove('hidden');
+                resetState();
+                if (score === questions.length) {
+                    closeButton.classList.remove('hidden');
+                    nextButton.style.display = 'none';
+                } else {
+                    nextButton.innerText = 'Reiniciar';
+                    nextButton.style.display = 'block';
+                    closeButton.classList.add('hidden');
+                }
+            }
+        });
+
+        function closeQuiz() {
+            console.log("aqui")
+            questionContainer.style.display = 'none';
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

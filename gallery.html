@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="stylesheets/gallery.css">
+</head>
+<body>
+    <div class="gallery">
+        <img src="images/Second_Images/1.jpeg">
+        <img src="images/Second_Images/2.jpeg">
+        <img src="images/Second_Images/3.jpeg">
+        <img src="images/Second_Images/4.jpeg">
+        <img src="images/Second_Images/5.jpeg">
+        <img src="images/Second_Images/6.jpeg">
+        <img src="images/Second_Images/7.jpeg">
+        <img src="images/Second_Images/8.jpeg">
+        <img src="images/Second_Images/9.jpeg">
+        <img src="images/Second_Images/10.jpeg">
+    </div>
+
+    <script>
+        const galleryImages = document.querySelectorAll('.gallery img');
+        let currentImageIndex = 0;
+        let loopActive = true; // Controle para o loop continuar até um clique
+
+        function showImagesLoop() {
+            if (!loopActive) return; // Se o usuário clicou, para o loop
+            
+            galleryImages.forEach((img, index) => {
+                setTimeout(() => {
+                    if (!loopActive) return; // Verifica se o loop ainda deve continuar
+                    currentImageIndex = index;
+                    
+                    // Quando a última imagem for exibida, reinicia o loop
+                    if (index === galleryImages.length - 1) {
+                        setTimeout(() => {
+                            if (loopActive) showImagesLoop(); // Reinicia o loop se ainda estiver ativo
+                        }, 5700);
+                    }
+                }, index * 5700); // Cada imagem aparece por 5.7 segundos
+            });
+        }
+
+        // Começa o loop de exibição das imagens
+        showImagesLoop();
+
+        // Evento para interromper o loop quando o usuário clicar em uma imagem
+        galleryImages.forEach(img => {
+            img.addEventListener('click', () => {
+                loopActive = false; // Para o loop
+                
+                document.body.classList.add('fade-out');
+
+                setTimeout(() => {
+                    document.body.style.display = 'none';
+
+                    if (window.parent) {
+                        // Para a música na página principal
+                        const backgroundMusic = window.parent.document.getElementById('background-music');
+                        if (backgroundMusic) {
+                            backgroundMusic.pause();
+                            backgroundMusic.currentTime = 0;
+                        }
+
+                        // Atualiza `digit-3` na página principal
+                        const digitElement = window.parent.document.getElementById('digit-3');
+                        if (digitElement) {
+                            digitElement.innerText = '2';
+                        }
+
+                        // Fecha o overlay na `chet.html`
+                        const overlay = window.parent.document.getElementById('overlay');
+                        if (overlay) {
+                            overlay.style.display = 'none';
+                        }
+                    }
+
+                }, 2000); // Tempo do fade-out
+            });
+        });
+    </script>
+</body>
+</html>

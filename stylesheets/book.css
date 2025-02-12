@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap");
+
+:root {
+    --color-cover: hsl(0, 44%, 42%);
+    --color-cover-text: hsl(40, 64%, 80%);
+    --duration: 9700ms;
+    --initial-delay: 700ms;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    font-family: "Cormorant Garamond", Garamond, "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: antiquewhite;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), transparent 10%) antiquewhite;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: inherit;
+    z-index: calc(5 - var(--id, 0));
+    transform: translateZ(calc(var(--id, 0) * -1px));
+    transform-origin: left;
+}
+
+main.page {
+    animation: none;
+    padding: 16px; /* Reduzido para um livro menor */
+    box-sizing: border-box;
+    overflow-y: scroll;
+    z-index: 1;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    color: var(--color-cover-text);
+    z-index: 5;
+    padding: 4%; /* Ajustado para o novo tamanho */
+    box-sizing: border-box;
+    font-size: clamp(10px, 1.8vh, 30px); /* Texto menor */
+    background: var(--color-cover);
+}
+
+.cover-content {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-auto-rows: 1fr;
+    height: 85%; /* Reduzido para o novo tamanho */
+    width: 85%;
+    box-sizing: border-box;
+    margin: 7%;
+    padding: 4%; /* Ajustado */
+    border: 10px double var(--color-cover-text); /* Ajustado */
+    text-align: center;
+}
+
+.cover h1, .cover h2 {
+    font-weight: 300;
+}
+
+.cover h1 {
+    text-transform: uppercase;
+}
+
+.cover img {
+    width: 40%; /* Imagem menor */
+    filter: sepia(100%) brightness(120%) saturate(1500%) hue-rotate(30deg);
+}
+
+.back {
+    transform: translateZ(calc(5 * -1px));
+    z-index: 0;
+}
+
+/* Configuração do livro fechado */
+.book {
+    cursor: pointer;
+    width: 45vh; /* Largura reduzida */
+    height: 65vh; /* Altura reduzida */
+    border-radius: 0 12px 12px 0; /* Bordas ajustadas */
+    transform-style: preserve-3d;
+    transform: scale(0.5) rotateX(60deg) rotateZ(30deg); /* Inicia fechado */
+    transition: transform 1s ease-in-out; /* Suaviza a abertura/fechamento */
+}
+
+/* Apenas algumas páginas viram para revelar o conteúdo */
+.page.flip {
+    animation: turn-page var(--duration) ease-in-out forwards;
+}
+
+@keyframes turn-page {
+    from {
+        transform: translateZ(calc(var(--id, 0) * -1px)) rotateY(0);
+    }
+    to {
+        transform: translateZ(calc((5 - var(--id, 0)) * -1px)) rotateY(-160deg); /* Agora para na página do conteúdo */
+    }
+}
+
+
+.content-page img {
+    max-width: 60%; 
+    display: block; 
+    margin: 10px auto; 
+    border-radius: 8px; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); 
+}
+
+
+.page-image {
+    width: 90%; /* Ocupa quase toda a página */
+    height: 90%; /* Mantém a proporção */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    display: block; /* Remove espaços extras */
+    margin: auto; /* Centraliza dentro da página */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); /* Efeito de sombra */
+    margin-top: 8%;
+}

@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    overflow: hidden; /* Impede barras de rolagem */
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #0d1b2a, #000428);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.meteor {
+    position: fixed; /* Fixa o meteorito em relação à janela */
+    width: 300px;
+    height: 1px;
+    transform: rotate(-45deg);
+    background-image: linear-gradient(to right, #fff, rgba(255,255,255,0));
+    animation: meteor 5s linear infinite; /* Ajuste a duração conforme necessário */
+    pointer-events: none; /* Evita interação com meteoritos */
+}
+
+.meteor:before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 5px;
+    border-radius: 50%;
+    margin-top: -2px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 15px 3px #fff;
+}
+
+@keyframes meteor {
+    0% {
+        opacity: 1;
+        transform: translate(0, -300px) rotate(-45deg); /* Substitui margin-top */
+    }
+    12% {
+        opacity: 0;
+    }
+    15% {
+        transform: translate(-600px, 300px) rotate(-45deg); /* Substitui margin-left */
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-1000px, 600px) rotate(-45deg); /* Finaliza fora da tela */
+    }
+}
+
+#introText {
+    position: absolute;
+    color: white;
+    font-size: 5rem; /* Ajusta o tamanho do texto principal */
+    font-family: 'Bangers', cursive; /* Fonte divertida e animada */
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Inicialmente fora de vista e menor */
+    opacity: 0; /* Começa invisível */
+    animation: fadeInScale 2s ease-in-out forwards, bounce 1.5s infinite 4s; /* Adiciona animações */
+    text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.8); /* Adiciona brilho ao texto */
+}
+
+#subText {
+    position: absolute;
+    color: white;
+    font-size: 1.5rem; /* Tamanho proporcional ao texto principal */
+    font-family: 'Bangers', cursive; /* Usa a mesma fonte que o texto principal */
+    text-align: center;
+    top: calc(57% + 2.5rem); /* Posiciona logo abaixo do texto principal */
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); /* Inicialmente fora de vista e menor */
+    opacity: 0; /* Começa invisível */
+    animation: fadeInScale 2s ease-in-out forwards, bounce 1.5s infinite 4s; /* Mesma animação do introText */
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8); /* Adiciona brilho ao texto */
+}
+
+/* Faz com que o texto se ajuste em telas menores */
+@media (max-width: 768px) {
+    #introText {
+        font-size: 3rem; /* Reduz o tamanho em telas pequenas */
+    }
+
+    #subText {
+        font-size: 1rem; /* Reduz o tamanho do texto secundário */
+        top: calc(57% + 1.5rem); /* Ajusta o espaço abaixo do texto principal */
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    40% {
+        transform: translate(-50%, calc(-50% - 20px)) scale(1);
+    }
+    60% {
+        transform: translate(-50%, calc(-50% - 10px)) scale(1);
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/video.css">
+</head>
+<body>
+<div class="video-container">
+        <video id="backgroundVideo" src="images/disney.mp4" type="video/mp4"></video>
+    </div>
+  </body>
+ 
+
+<script>
+    let videoPlaying = true;
+    const overlay = document.getElementById('overlay');
+        const video = document.getElementById('backgroundVideo');
+    
+            const transition = document.getElementById('transition');
+         
+          
+                video.classList.add('active');
+                video.play();
+
+                video.onended = () => {
+                    videoPlaying = false; // Allow interactions after video ends
+    
+                    setTimeout(() => {
+                        document.getElementById('game').style.display = 'block';
+                        document.querySelector('.video-container').style.display = 'none';
+                        transition.classList.remove('active');
+                    }, 1000);
+
+                    window.location.href='oldchest.html';
+                };
+
+            
+        
+
+       
+</script>
+</body>
+</html>
