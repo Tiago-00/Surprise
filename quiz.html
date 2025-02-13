@@ -101,115 +101,127 @@
             questionContainer.style.display = 'block';
             showQuestion();
         }
-
         function showQuestion() {
-            resetState();
-            let currentQuestion = questions[currentQuestionIndex];
-            questionContainer.innerHTML = '';
+        resetState();
+        let currentQuestion = questions[currentQuestionIndex];
+        questionContainer.innerHTML = '';
 
-            if (currentQuestion.question) {
-                const questionText = document.createElement('p');
-                questionText.innerText = currentQuestion.question;
-                questionContainer.appendChild(questionText);
-            }
-            
-            const container = document.createElement('div');
-            container.classList.add(currentQuestion.answers[0].image ? 'image-container' : 'btn-container');
-            
-            currentQuestion.answers.forEach(answer => {
-                const button = document.createElement('button');
-                button.classList.add('btn');
-                button.dataset.correct = answer.correct;
-                button.addEventListener('click', () => selectAnswer(button, answer));
-                
-                if (answer.text) {
-                    button.innerText = answer.text;
-                } else if (answer.image) {
-                    const img = document.createElement('img');
-                    img.src = answer.image;
-                    img.alt = "Opção de resposta";
-                    img.classList.add('answer-image');
-                    button.appendChild(img);
-                }
-                
-                container.appendChild(button);
-            });
-            answerButtons.appendChild(container);
-
-            if (currentQuestion.textBox) {
-                userResponse.classList.remove('hidden');
-                userResponse.addEventListener('input', handleTextBoxInput);
-            } else {
-                userResponse.classList.add('hidden');
-            }
+        if (currentQuestion.question) {
+            const questionText = document.createElement('p');
+            questionText.innerText = currentQuestion.question;
+            questionContainer.appendChild(questionText);
         }
 
-        function handleTextBoxInput() {
-            const buttons = document.querySelectorAll('.btn');
-            if (userResponse.value.trim().length > 0) {
-                nextButton.style.display = 'block';
-                buttons.forEach(button => button.classList.add('disabled'));
-            } else {
-                nextButton.style.display = 'none';
-                buttons.forEach(button => button.classList.remove('disabled'));
-            }
-        }
+        const container = document.createElement('div');
+        container.classList.add(currentQuestion.answers[0].image ? 'image-container' : 'btn-container');
 
-        function resetState() {
-            nextButton.style.display = 'none';
-            while (answerButtons.firstChild) {
-                answerButtons.removeChild(answerButtons.firstChild);
-            }
-            userResponse.value = '';
-        }
+        currentQuestion.answers.forEach(answer => {
+            const button = document.createElement('button');
+            button.classList.add('btn');
+            button.dataset.correct = answer.correct;
 
-        function selectAnswer(button) {
-            if (!userResponse.classList.contains('hidden') && userResponse.value.trim() !== '') {
-                return;
+            if (answer.text) {
+                button.innerText = answer.text;
+            } else if (answer.image) {
+                const img = document.createElement('img');
+                img.src = answer.image;
+                img.alt = "Opção de resposta";
+                img.classList.add('answer-image');
+                button.appendChild(img);
             }
-            
-            if (selectedAnswer) {
-                selectedAnswer.classList.remove('selected');
-            }
-            selectedAnswer = button;
-            button.classList.add('selected');
-            nextButton.style.display = 'block';
-        }
 
-        nextButton.addEventListener('click', () => {
-            if (nextButton.innerText === 'Reiniciar') {
-                startGame();
-                return;
-            }
-            
-            if (selectedAnswer && selectedAnswer.dataset.correct === "true") {
-                score++;
-            }
-            
-            currentQuestionIndex++;
-            selectedAnswer = null;
-            if (currentQuestionIndex < questions.length) {
-                showQuestion();
-            } else {
-                questionContainer.style.display = 'none';
-                scoreText.innerText = `Você acertou ${score} de ${questions.length} perguntas!`;
-                scoreText.classList.remove('hidden');
-                resetState();
-                if (score === questions.length) {
-                    closeButton.classList.remove('hidden');
-                    nextButton.style.display = 'none';
-                } else {
-                    nextButton.innerText = 'Reiniciar';
-                    nextButton.style.display = 'block';
-                    closeButton.classList.add('hidden');
-                }
-            }
+            button.addEventListener('click', () => selectAnswer(button));
+            container.appendChild(button);
         });
 
-        function closeQuiz() {
-            console.log("aqui")
-            questionContainer.style.display = 'none';
+        answerButtons.appendChild(container);
+
+        if (currentQuestion.textBox) {
+            userResponse.classList.remove('hidden');
+            userResponse.addEventListener('input', handleTextBoxInput);
+        } else {
+            userResponse.classList.add('hidden');
         }
+    }
+
+    function handleTextBoxInput() {
+        const buttons = document.querySelectorAll('.btn');
+
+        if (userResponse.value.trim().length > 0) {
+            nextButton.style.display = 'block';
+            buttons.forEach(button => button.classList.add('disabled'));
+            selectedAnswer = { isTextBox: true, correct: true }; // Identifica que a resposta veio do input
+        } else {
+            nextButton.style.display = 'none';
+            buttons.forEach(button => button.classList.remove('disabled'));
+            selectedAnswer = null;
+        }
+    }
+
+    function resetState() {
+        nextButton.style.display = 'none';
+        while (answerButtons.firstChild) {
+            answerButtons.removeChild(answerButtons.firstChild);
+        }
+        userResponse.value = '';
+        selectedAnswer = null;
+    }
+
+    function selectAnswer(button) {
+        if (userResponse.value.trim().length > 0) {
+            return;
+        }
+
+        if (selectedAnswer && selectedAnswer.classList) {
+            selectedAnswer.classList.remove('selected');
+        }
+        selectedAnswer = button;
+        button.classList.add('selected');
+        nextButton.style.display = 'block';
+    }
+
+    // Verifica corretamente se a resposta é correta
+    function isAnswerCorrect() {
+        if (!selectedAnswer) return false;
+        if (selectedAnswer.isTextBox) return true; // Se veio do input, é sempre correto
+        return selectedAnswer.dataset.correct === "true";
+    }
+
+    nextButton.addEventListener('click', () => {
+        if (nextButton.innerText === 'Reiniciar') {
+            startGame();
+            return;
+        }
+
+        if (isAnswerCorrect()) {
+            score++;
+        }
+
+        currentQuestionIndex++;
+        selectedAnswer = null;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            questionContainer.style.display = 'none';
+            scoreText.innerText = `Você acertou ${score} de ${questions.length} perguntas!`;
+            scoreText.classList.remove('hidden');
+            resetState();
+            if (score === questions.length) {
+                closeButton.classList.remove('hidden');
+                nextButton.style.display = 'none';
+            } else {
+                nextButton.innerText = 'Reiniciar';
+                nextButton.style.display = 'block';
+                closeButton.classList.add('hidden');
+            }
+        }
+    });
+
+    function closeQuiz() {
+        console.log("aqui");
+        questionContainer.style.display = 'none';
+    }
+
 
         startGame();
     </script>
